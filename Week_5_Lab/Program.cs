@@ -35,26 +35,34 @@ namespace Week_5_Lab
         //}
         public Stopwatch sw = Stopwatch.StartNew();
         public static int slowTime;
+        public MyClass myClass1 = new MyClass();
 
+        //static void Main()
+        //{
+        //    log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo("log4net.config"));
+
+        //    int iterations = 100_000;
+
+        //    Stopwatch sw = Stopwatch.StartNew();
+        //    string slowResult = SlowConcat(iterations);
+        //    sw.Stop();
+
+        //    MyClass myClass1 = new MyClass();
+        //    myClass1.ShowException($"SlowConcat Time: {sw.ElapsedMilliseconds} ms");
+
+        //    slowTime = (int)sw.ElapsedMilliseconds;
+
+        //    sw.Restart();
+        //    string fastResult = FastConcat(iterations);
+        //    sw.Stop();
+        //    myClass1.ShowException($"FastConcat Time: {sw.ElapsedMilliseconds} ms");
+        //}
         static void Main()
         {
             log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo("log4net.config"));
 
-            int iterations = 100_000;
-
-            Stopwatch sw = Stopwatch.StartNew();
-            string slowResult = SlowConcat(iterations);
-            sw.Stop();
-
-            MyClass myClass1 = new MyClass();
-            myClass1.ShowException($"SlowConcat Time: {sw.ElapsedMilliseconds} ms");
-
-            slowTime = (int)sw.ElapsedMilliseconds;
-
-            sw.Restart();
-            string fastResult = FastConcat(iterations);
-            sw.Stop();
-            myClass1.ShowException($"FastConcat Time: {sw.ElapsedMilliseconds} ms");
+            BetterSumOfSquares(27);
+            SumOfSquares(27);
         }
 
         // Inefficient method using string concatenation inside a loop
@@ -78,6 +86,28 @@ namespace Week_5_Lab
                 sb.Append(i); // Modifies the existing buffer, avoiding new allocations
             }
             return sb.ToString();
+        }
+        static int BetterSumOfSquares(int n)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            int sum = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                sum += i * i;
+            }
+            sw.Stop();
+            MyClass myClass1 = new MyClass();
+            myClass1.ShowException($"My Time: {sw.ElapsedMilliseconds} ms");
+            return sum;
+        }
+        static long SumOfSquares(int n)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            long ans = Enumerable.Range(1, n).Select(x => (long)x * x).Sum();
+            sw.Stop();
+            MyClass myClass1 = new MyClass();
+            myClass1.ShowException($"Lab Time: {sw.ElapsedMilliseconds} ms");
+            return ans;
         }
     }
     }
