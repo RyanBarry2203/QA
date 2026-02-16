@@ -63,6 +63,18 @@ namespace Week_5_Lab
 
             BetterSumOfSquares(27);
             SumOfSquares(27);
+
+            long initialMemory = GC.GetTotalMemory(false);
+
+            //PerformHeavyOperation();
+            var data = new int[10000000]; // Allocate a large array
+            Array.Fill(data, 42);
+
+            //GC.Collect();
+            long finalMemory = GC.GetTotalMemory(false);
+
+            MyClass myClass1 = new MyClass();
+            myClass1.ShowException($"Memory used: {finalMemory - initialMemory} bytes");
         }
 
         // Inefficient method using string concatenation inside a loop
